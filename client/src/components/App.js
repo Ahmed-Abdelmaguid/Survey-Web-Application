@@ -16,7 +16,7 @@ const App = () => {
     return (
         <div>
             <BrowserRouter>
-                <div>
+                <div className="container">
                     <Header />
                     <Route exact path="/" component={Landing} />
                     {/* exact ensures that component only appears when the path is exaclty the same */}
