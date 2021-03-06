@@ -1,16 +1,17 @@
 //redux
-import 'materialize-css/dist/css/materialize.min.css'
+import 'materialize-css/dist/css/materialize.min.css';
 import React from 'react';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 //provider is a component that makes the store accessible to every component in the app
 import { createStore, applyMiddleware } from 'redux';
 //store contains all components and is connceted to our react side
+import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
 
-const store = createStore(reducers, {}, applyMiddleware());
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 //created a redux store at the top level of our application first arguments contains all the reducers, second argument initial state of my application 
 
 
