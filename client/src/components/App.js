@@ -9,9 +9,10 @@ import * as actions from '../actions';
 //route is the react component that is used to set up a rule betweena certain route url and a set of components that will be visible on the screen   
 
 import Header from './Header';
+import Landing from './Landing';
 const Dashboard = () => <h2>Dashboard</h2>
 const SurveyNew = () => <h2>SurveyNew</h2>
-const Landing = () => <h2>Landing</h2>
+
 
 
 class App extends Component {
