@@ -8,11 +8,11 @@ import validateEmails from '../../utils/validateEmails';
 
 
 const FIELDS = [
-    { label: 'Survey Title', name: 'title', noValueError: 'You must provide a title' },
-    { label: 'Subject Line', name: 'subject', noValueError: 'You must provide a subject' },
-    { label: 'Email Body', name: 'body', noValueError: 'You must provide a body' },
-    { label: 'Recipient List', name: 'email', noValueError: 'You must provide a email' }
-];
+    { label: 'Survey Title', name: 'title' },
+    { label: 'Subject Line', name: 'subject' },
+    { label: 'Email Body', name: 'body' },
+    { label: 'Recipient List', name: 'emails' },
+  ];
 
 class SurveyForm extends Component {
     renderFields() {
@@ -42,13 +42,13 @@ class SurveyForm extends Component {
 function validate(values) {
     const errors = {};
 
-    FIELDS.forEach( ({ name, noValueError }) => {
+    errors.emails = validateEmails(values.emails || '');
+
+    FIELDS.forEach( ({ name }) => {
         if (!values[name]) {
-            errors[name] = noValueError;
+         errors[name] = 'You must provide a value';
         }
     });
-
-    errors.emails = validateEmails(values.emails || '');
 
     return errors;
 }
