@@ -8,7 +8,7 @@ export default emails => {
     //map works by taking the value out of the array then whatever we return will be added a new array then returns the new array   
 
     if (invalidEmails.length) {
-        return `These emails are invalid: ${invalidEmails} or there is a comma at the end`;
+        return `These emails are invalid: ${invalidEmails} or there is a , at the end`;
     }
 
     return;

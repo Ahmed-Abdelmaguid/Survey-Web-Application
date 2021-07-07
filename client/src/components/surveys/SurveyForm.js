@@ -5,18 +5,12 @@ import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails';
+import formFields from './formFields';
 
-
-const FIELDS = [
-    { label: 'Survey Title', name: 'title' },
-    { label: 'Subject Line', name: 'subject' },
-    { label: 'Email Body', name: 'body' },
-    { label: 'Recipient List', name: 'emails' },
-  ];
 
 class SurveyForm extends Component {
     renderFields() {
-        return _.map(FIELDS, ({ label, name }) => { //iterate over FIELD for every object here run this function and create a new field and return it
+        return _.map(formFields, ({ label, name }) => { //iterate over FIELD for every object here run this function and create a new field and return it
             return <Field key={name} component={SurveyField} type='text' label={label} name={name} />
         });
     }
@@ -24,7 +18,7 @@ class SurveyForm extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+                <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
                     {this.renderFields()}
                     <Link to="/surveys" className="red btn-flat white-text">
                         Cancel
@@ -42,9 +36,9 @@ class SurveyForm extends Component {
 function validate(values) {
     const errors = {};
 
-    errors.emails = validateEmails(values.emails || '');
+    errors.recipients = validateEmails(values.recipients || '');
 
-    FIELDS.forEach( ({ name }) => {
+    formFields.forEach( ({ name }) => {
         if (!values[name]) {
          errors[name] = 'You must provide a value';
         }
@@ -55,5 +49,6 @@ function validate(values) {
 
 export default reduxForm({
     validate,
-    form: 'surveyForm'
+    form: 'surveyForm',
+    destroyOnUnmount: false // so that when the user clicks on back in SurveyFormReview the values he/she submitted are still there for the user to edit
 })(SurveyForm);
